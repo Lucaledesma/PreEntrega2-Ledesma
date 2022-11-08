@@ -108,7 +108,7 @@ function menu(){
 
             case 4:
                 alert("SALIENDO DEL SISTEMA");
-                console.log("¡Gracias por su visita!. Que tenga un buen dia.");
+                console.log("\n¡Gracias por su visita!. Que tenga un buen dia.");
             break;
 
             default:
@@ -128,7 +128,7 @@ function comprar(){
         productos.forEach(producto => console.log(producto.id + ") " + producto.nombre + " ($" + producto.precio + ")"));
         console.log("SI COMPRAS MAS DE UN MISMO PRODUCTO, LOS SIGUIENTES TENDRAN UN 10% DE DESCUENTO");
 
-        const pr = productos.map(producto => producto.nombre)
+        const pr = productos.map(producto => producto.nombre);
 
         item = Number(prompt("ELEGIR UN PRODUCTO (1-5) : OTRO VALOR PARA IR AL MENU\n" + pr.join(" - ") + "\n\n- Oferta:\nSI COMPRAS MAS DE UN MISMO PRODUCTO, LOS SIGUIENTES TENDRAN UN 10% DE DESCUENTO"));
 
