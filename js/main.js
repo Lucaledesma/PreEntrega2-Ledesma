@@ -84,11 +84,12 @@ function menu(){
     let opcion = 0;
     do{
         console.log("\n*********** MENU ***********"); 
-        console.log("Elija una opcion:");
-        console.log("1) Comprar Productos");
-        console.log("2) Consultar Saldo");
-        console.log("3) Salir"); 
-        opcion = Number(prompt("Elija una opcion:\n1) Comprar Productos\n2) Consultar Saldo\n3) Salir"));
+        console.log("ELEGIR UNA OPCION:");
+        console.log("1) Comprar Productos.");
+        console.log("2) Consultar Productos.");
+        console.log("3) Consultar Saldo.");
+        console.log("4) Salir."); 
+        opcion = Number(prompt("ELEGIR UNA OPCION:\n1) Comprar Productos.\n2) Consultar Productos.\n3) Consultar Saldo.\n4) Salir."));
 
         switch(opcion){
             case 1:
@@ -97,11 +98,15 @@ function menu(){
             break;
 
             case 2:
+                consultarProductos(carrito1.productos);
+            break;
+
+            case 3:
                 consultarSaldo();
                 menu();
             break;
 
-            case 3:
+            case 4:
                 alert("SALIENDO DEL SISTEMA");
                 console.log("¡Gracias por su visita!. Que tenga un buen dia.");
             break;
@@ -110,7 +115,7 @@ function menu(){
                 console.log("ERROR: OPCION NO VALIDA. INTENTE NUEVAMENTE.");
         }
 
-    }while((opcion<1) || (opcion>3) || (isNaN(opcion)))
+    }while((opcion<1) || (opcion>4) || (isNaN(opcion)))
 }
 
 function comprar(){   
@@ -119,14 +124,13 @@ function comprar(){
 
     do{
         console.log("\n*********** COMPRAS ***********"); 
-        console.log("Elija el producto que quieras comprar (1-5):");
+        console.log("Elija el producto que quieras comprar (1-5): OTRO VALOR PARA IR AL MENU");
         productos.forEach(producto => console.log(producto.id + ") " + producto.nombre + " ($" + producto.precio + ")"));
-        console.log("Ingrese otro valor para volver al menu!");
         console.log("SI COMPRAS MAS DE UN MISMO PRODUCTO, LOS SIGUIENTES TENDRAN UN 10% DE DESCUENTO");
 
         const pr = productos.map(producto => producto.nombre)
 
-        item = Number(prompt("Elija el producto a comprar (1-5): OTRO VALOR PARA IR AL MENU\n-\n" + pr.join(" - ") + "\n-\nSI COMPRAS MAS DE UN MISMO PRODUCTO, LOS SIGUIENTES TENDRAN UN 10% DE DESCUENTO"));
+        item = Number(prompt("ELEGIR UN PRODUCTO (1-5) : OTRO VALOR PARA IR AL MENU\n" + pr.join(" - ") + "\n\n- Oferta:\nSI COMPRAS MAS DE UN MISMO PRODUCTO, LOS SIGUIENTES TENDRAN UN 10% DE DESCUENTO"));
 
         if ((item>0) && (item<productos.length+1)){
             retorno = validarPago(productos.find(producto => producto.id==item));
@@ -163,6 +167,15 @@ function validarPago(pr){
 
     return ret;
 
+}
+
+function consultarProductos(productos){
+    let s = "";
+    productos.forEach(producto => s += producto.nombre + " - ");
+    console.log("\n*********** CONSULTA PRODUCTOS ***********"); 
+    console.log("Productos adquiridos hasta ahora: " + s);
+    alert("PRODUCTOS ADQUIRIDOS:\n" + s);
+    menu();
 }
 
 function confirmacionCompra(producto){
